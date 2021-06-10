@@ -54,10 +54,8 @@ class createUser(graphene.Mutation):
     token = graphene.String()
 
     def mutate(self, info, username, password):
-        user = UserModel(username=username, password=password)
-        token = create_access_token(identity=username)
-        user.save()
-        return createUser(user=user, success=True, token=token)
+        user = UserModel(username=username, password=password).save()
+        return createUser(user=user, success=True)
 
 
 class deleteUser(graphene.Mutation):
