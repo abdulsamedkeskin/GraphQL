@@ -23,6 +23,7 @@ class Auth(graphene.Mutation):
 
     access_token = graphene.String()
     refresh_token = graphene.String()
+    success = graphene.Boolean()
 
     def mutate(self, info, username, password):
         user = UserModel.objects.get(username=username, password=password)
@@ -30,8 +31,9 @@ class Auth(graphene.Mutation):
             return Auth(
                 access_token=create_access_token(identity=username),
                 refresh_token=create_refresh_token(identity=username),
+                success=True,
             )
-        return ["Kullanıcı Adı veya Şifre yanlış"]
+        return Auth(success=False)
 
 
 class refreshToken(graphene.Mutation):
@@ -51,7 +53,6 @@ class createUser(graphene.Mutation):
 
     user = graphene.Field(User)
     success = graphene.Boolean()
-    token = graphene.String()
 
     def mutate(self, info, username, password):
         user = UserModel(username=username, password=password).save()
