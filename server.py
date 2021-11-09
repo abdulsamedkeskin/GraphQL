@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.debug = True
 app.config['MONGODB_SETTINGS'] = {
     "db": "GraphQL",
-    "host": "mongodb+srv://admin:aCt8HMn2x86VQf9A@graphql.x2xxw.mongodb.net/GraphQL?retryWrites=true&w=majority&ssl=true&ssl_cert_reqs=CERT_NONE",
+    "host": "host",
     "username": "admin",
     "password": "aCt8HMn2x86VQf9A"
 }
